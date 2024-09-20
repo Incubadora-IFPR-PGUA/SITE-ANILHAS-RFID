@@ -38,7 +38,7 @@ function updateTable(data, type) {
         let row = '';
 
         if (type === 'cadastro' || type === 'pendente') {
-            row = `<tr class="clickable-row" data-id="${item.id}" data-name="${item.name}" data-codigo="${item.codigo}" style="cursor: pointer;" onmouseover="this.style.backgroundColor='#cce4ff';" onmouseout="this.style.backgroundColor='';">
+            row = `<tr class="clickable-row" data-id="${item.id}" data-name="${item.name}" data-codigo="${item.codigo}" style="cursor: pointer;" onmouseover="this.style.backgroundColor='#cce4ff';" onmouseout="this.style.backgroundColor='';"    >
                 <td class="py-2 px-4 border-b border-gray-300 text-center">${item.name}</td>
                 <td class="py-2 px-4 border-b border-gray-300 text-center">${item.codigo}</td>
             </tr>`;
