@@ -41,4 +41,4 @@ function reloadTable() {
     }
 }
 
-setInterval(reloadTable, 3000);
+setInterval(reloadTable, 1000);
