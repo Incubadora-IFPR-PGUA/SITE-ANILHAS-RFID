@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cadastroReload', 'App\Http\Controllers\AnilhaCadastroController@reload');
     Route::get('/registroReload', 'App\Http\Controllers\AnilhaRegistroController@reload');
     Route::get('/pendenteReload', 'App\Http\Controllers\AnilhaPendenteController@reload');
-    Route::get('/macaddressReload', 'App\Http\Controllers\SmartHarpiaController@macaddressReload'); /* ESSA ROTA TA RETORNANDO DADOS FALSOS */
+    Route::get('/macaddressReload', 'App\Http\Controllers\SmartHarpiaController@macaddressReload');
 
     Route::post('/pendente/{id}', 'App\Http\Controllers\AnilhaPendenteController@acceptRequest');
 

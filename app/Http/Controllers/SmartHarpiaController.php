@@ -14,38 +14,12 @@ class SmartHarpiaController extends Controller {
     }
 
     public function index() {
-        //$data = $this->apiService->getMacAddressInJson();
+        $data = $this->apiService->getMacAddressInJson();
         return view('macaddress.index');
     }
 
     public function macaddressReload() {
-        $data = [
-            [
-                'dataHora' => '2024-09-17 10:30:00',
-                'localizacao' => 'Sala A',
-                'permitido' => true,
-                'mac' => '00:14:22:01:23:45',
-                'fabricante' => 'Apple',
-                'esp' => 'ESP-001',
-            ],
-            [
-                'dataHora' => '2024-09-17 11:00:00',
-                'localizacao' => 'Sala B',
-                'permitido' => false,
-                'mac' => '00:14:22:01:23:46',
-                'fabricante' => 'Samsung',
-                'esp' => 'ESP-002',
-            ],
-            [
-                'dataHora' => '2024-09-17 12:15:00',
-                'localizacao' => 'Sala C',
-                'permitido' => true,
-                'mac' => '00:14:22:01:23:47',
-                'fabricante' => 'Dell',
-                'esp' => 'ESP-003',
-            ]
-        ];
-    
+        $data = $this->apiService->getMacAddressInJson();
         return response()->json($data);
     }    
 

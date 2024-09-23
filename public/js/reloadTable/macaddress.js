@@ -1,19 +1,29 @@
-function updateTable(data, type){
+function updateTable(data){
     let tbody = document.querySelector('tbody');
     tbody.innerHTML = '';
 
     data.forEach(item => {
+        let date = new Date(item.data_hora_captura);
+        let formattedDate = date.toLocaleString('pt-BR', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+        });
+
         let row = `
                 <tr class="text-center clickable-row" style="cursor: pointer;" 
                     onmouseover="this.style.backgroundColor='#cce4ff';" 
                     onmouseout="this.style.backgroundColor='';" 
-                    onclick="openModal('${item.mac}', '${item.fabricante}')">
-                    <td class="py-2 px-4 border-b">${item.dataHora}</td>
-                    <td class="py-2 px-4 border-b">${item.localizacao}</td>
+                    onclick="openModal('${item.MAC}', '${item.fabricante}')">
+                    <td class="py-2 px-4 border-b">${formattedDate}</td>
+                    <td class="py-2 px-4 border-b">${item.localizacao="CONECTAR-API"}</td>
                     <td class="py-2 px-4 border-b ${item.permitido ? 'text-success' : 'text-danger'}">
                         ${item.permitido ? 'Sim' : 'Não'}
                     </td>
-                    <td class="py-2 px-4 border-b">${item.esp}</td>
+                    <td class="py-2 px-4 border-b">${item.esp="?CONECTAR-API"}</td>
                 </tr>
             `;
         tbody.innerHTML += row;
@@ -41,4 +51,4 @@ function reloadTable() {
     }
 }
 
-setInterval(reloadTable, 1000);
+ setInterval(reloadTable, 1000);

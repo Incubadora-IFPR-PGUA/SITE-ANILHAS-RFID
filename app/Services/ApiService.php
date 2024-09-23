@@ -17,7 +17,7 @@ class ApiService {
     }
 
     public function getMacAddressInJson(){
-        $response = Http::get("{$this->baseUrl}/?????????????");
+        $response = Http::get("{$this->baseUrl}/listarMacsCapturados");
         return $response->json();
     }
 

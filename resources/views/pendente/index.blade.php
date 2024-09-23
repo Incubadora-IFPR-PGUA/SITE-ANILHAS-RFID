@@ -63,6 +63,6 @@
     </div>
 </div>
 
-<script src="{{ asset('js/reloadTable/anilhaPendente.js') }}"></script>
+<script src="{{ asset('js/reloadTables.js') }}"></script>
 
 @endsection
