@@ -2,55 +2,35 @@
 
 @section('conteudo')
 
-<!-- Modal -->
-<div class="modal fade" id="MyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal -->  
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">INFORMAÇÕES ANILHA</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- Modo de Edicao -->
-        <form id="editForm" method="POST" style="display: none;">
-          @csrf
-          @method('PUT') <!-- Isso definirá o método PUT para a requisição de atualização -->
+        <form id="editForm">
           <div class="mb-3">
-            <label for="editName" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="editName" name="name" required>
+            <label for="modalName" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="modalName">
           </div>
           <div class="mb-3">
-            <label for="editCodigo" class="form-label">Anilha</label>
-            <input type="text" class="form-control" id="editCodigo" name="codigo" disabled>
-          </div>
-          <div class="modal-footer d-flex justify-content-between">
-            <button id="btCancelEdit" type="button" class="btn btn-secondary">Voltar</button>
-            <button id="btViewAccept" type="button" class="btn btn-success">Aceitar</button>
-            <button id="btSalvar" type="submit" class="btn btn-primary">Salvar</button>
+            <label for="modalCodigo" class="form-label">Código</label>
+            <input type="text" class="form-control" id="modalCodigo" disabled>
           </div>
         </form>
-
-        <!-- Modo de Visualizacao -->
-        <form id="viewForm" method="POST" action="/cadastroDelete/{id}" style="display: block;">
-          @csrf
-          @method('DELETE')
-          <div class="mb-3">
-            <label for="viewName" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="viewName" name="name" disabled>
-          </div>
-          <div class="mb-3">
-            <label for="viewCodigo" class="form-label">Anilha</label>
-            <input type="text" class="form-control" id="viewCodigo" name="codigo" disabled>
-          </div>
-          <div class="modal-footer d-flex justify-content-between">
-            <button id="btViewDelete" type="submit" class="btn btn-danger">Excluir</button>
-            <button id="btViewEdit" type="button" class="btn btn-primary">Editar</button>
-          </div>
-        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="deleteButton" class="btn btn-danger">Excluir</button>
+        <button type="button" id="saveButton" class="btn btn-success">Salvar</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Table -->
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -62,6 +42,6 @@
     </div>
 </div>
 
-<script src="{{ asset('js/reloadTables.js') }}"></script>
+<script src="{{ asset('js/reloadTable/cadastro.js') }}"></script>
 
 @endsection

@@ -69,10 +69,21 @@
                             {{ __('Registros') }}
                         </x-nav-link>
                         @endcan
+                    @elseif(request()->routeIs('smart-horta'))
+                        @can('hasFullPermission', App\Models\AnilhaRegistro::class)
+                        <x-nav-link :href="route('horta.index')" class="nav-link">
+                            {{ __('Registros') }}
+                        </x-nav-link>
+                        @endcan
                     @else
                         @can('hasFullPermission', App\Models\AnilhaRegistro::class)
                         <x-nav-link :href="route('smart-anilhas')" class="nav-link">
-                            {{ __('Anilhas') }}
+                            {{ __('Smart-Anilhas') }}
+                        </x-nav-link>
+                        @endcan
+                        @can('hasFullPermission', App\Models\AnilhaRegistro::class)
+                        <x-nav-link :href="route('smart-horta')" class="nav-link">
+                            {{ __('Smart-Horta') }}
                         </x-nav-link>
                         @endcan
                         @can('hasFullPermission', App\Models\AnilhaRegistro::class)
@@ -94,8 +105,6 @@
                             </div>
                             <div>{{ Auth::user()->name }}</div>
                         </button>
-
-
                     </x-slot>
 
                     <x-slot name="content">

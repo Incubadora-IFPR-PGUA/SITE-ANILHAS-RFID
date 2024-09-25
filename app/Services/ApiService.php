@@ -16,11 +16,6 @@ class ApiService {
         return $response->json();
     }
 
-    public function getMacAddressInJson(){
-        $response = Http::get("{$this->baseUrl}/listarMacsCapturados");
-        return $response->json();
-    }
-
     // Anilhas Cadastradas
     public function getAnilhasCadastros() {
         $response = Http::get("{$this->baseUrl}/listarAnilhaCadastradas");
@@ -90,6 +85,18 @@ class ApiService {
 
     public function deleteAnilhasPendentesById($id){
         $response = Http::delete("{$this->baseUrl}/excluirAnilhaPendente/{$id}");
+        return $response->json();
+    }
+
+    // HORTA API
+    public function getHortaInJson(){
+        $response = Http::get("{$this->baseUrl}/listarHorta");
+        return $response->json();
+    }
+
+    // MAC API
+    public function getMacAddressInJson(){
+        $response = Http::get("{$this->baseUrl}/listarMacsCapturados");
         return $response->json();
     }
 }
