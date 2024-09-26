@@ -28,16 +28,28 @@ class AnilhaCadastroController extends Controller {
 
     public function update(Request $request, $id) {
         $this->authorize('hasFullPermission', AnilhaCadastro::class);
+        
+        // Validação do input
+        $request->validate([
+            'name' => 'required|string|max:255', // Adapte conforme necessário
+        ]);
+    
+        // Verifica se o cadastro existe
         $data = $this->apiService->getAnilhasCadastrosById($id);
-        if(isset($data)) {
+        if (isset($data)) {
             $dadosAtualizacao = [
                 'name' => $request->input('name'),
+                'updated_at' => now(), // Adiciona o timestamp de atualização
             ];
-            $data = $this->apiService->setAnilhasCadastros($id, $dadosAtualizacao);
-            return redirect()->route('cadastro.index');
+    
+            // Atualiza os dados através da API
+            $this->apiService->setAnilhasCadastros($id, $dadosAtualizacao);
+            
+            return redirect()->route('cadastro.index')->with('success', 'Cadastro atualizado com sucesso!'); // Mensagem de sucesso
         }
-        return "<h1>ERRO: CADASTRO NÃO ENCONTRADO!</h1>";
-    }
+        
+        return redirect()->route('cadastro.index')->with('error', 'ERRO: CADASTRO NÃO ENCONTRADO!'); // Mensagem de erro
+    }    
     
     public function destroy($id) {
         $this->authorize('hasFullPermission', AnilhaCadastro::class);

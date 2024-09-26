@@ -89,7 +89,7 @@ class ApiService {
     }
 
     // HORTA API
-    public function getHortaInJson(){
+    public function listarHortaEmJson(){
         $response = Http::get("{$this->baseUrl}/listarHorta");
         return $response->json();
     }

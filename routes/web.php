@@ -26,7 +26,7 @@
         Route::get('/registroReload', 'App\Http\Controllers\AnilhaRegistroController@reload');
         Route::get('/pendenteReload', 'App\Http\Controllers\AnilhaPendenteController@reload');
         Route::get('/macaddressReload', 'App\Http\Controllers\SmartHarpiaController@macaddressReload');
-        Route::get('/hortaReload', 'App\Http\Controllers\SmartHortaController@hortaReload');
+        Route::get('/recarregarDadosHorta', 'App\Http\Controllers\SmartHortaController@recarregar');
 
         Route::post('/pendente/{id}', 'App\Http\Controllers\AnilhaPendenteController@acceptRequest');
 

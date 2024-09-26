@@ -176,4 +176,5 @@ function reloadTable() {
     }
 }
 
-setInterval(reloadTable, 3000);
+reloadTable();
+setInterval(reloadTable, 10000);

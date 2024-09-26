@@ -1,4 +1,4 @@
-function updateTable(data){
+function updateTable(data) {
     let tbody = document.querySelector('tbody');
     tbody.innerHTML = '';
 
@@ -13,19 +13,27 @@ function updateTable(data){
             second: '2-digit',
         });
 
+        let latitude = item.esp_mac_adress.latitude;
+        let longitude = item.esp_mac_adress.longitude;
+        let googleMapsLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
+
         let row = `
-                <tr class="text-center clickable-row" style="cursor: pointer;" 
-                    onmouseover="this.style.backgroundColor='#cce4ff';" 
-                    onmouseout="this.style.backgroundColor='';" 
-                    onclick="openModal('${item.MAC}', '${item.fabricante}')">
-                    <td class="py-2 px-4 border-b">${formattedDate}</td>
-                    <td class="py-2 px-4 border-b">${item.localizacao="CONECTAR-API"}</td>
-                    <td class="py-2 px-4 border-b ${item.permitido ? 'text-success' : 'text-danger'}">
-                        ${item.permitido ? 'Sim' : 'Não'}
-                    </td>
-                    <td class="py-2 px-4 border-b">${item.esp="?CONECTAR-API"}</td>
-                </tr>
-            `;
+            <tr class="text-center clickable-row" style="cursor: pointer;" 
+                onmouseover="this.style.backgroundColor='#cce4ff';" 
+                onmouseout="this.style.backgroundColor='';" 
+                onclick="openModal('${item.MAC}', '${item.fabricante}')">
+                <td class="py-2 px-4 border-b">${formattedDate}</td>
+                <td class="py-2 px-4 border-b">
+                    <a href="${googleMapsLink}" target="_blank" class="text-decoration-none">
+                        <i class="fas fa-map-marker-alt text-danger"></i> Localização
+                    </a> 
+                </td>
+                <td class="py-2 px-4 border-b ${item.permitido ? 'text-success' : 'text-danger'}">
+                    ${item.permitido ? 'Sim' : 'Não'}
+                </td>
+                <td class="py-2 px-4 border-b">${item.esp_mac_adress.id}</td>
+            </tr>
+        `;
         tbody.innerHTML += row;
     });
 }
@@ -39,16 +47,16 @@ function openModal(mac, fabricante) {
 
 function reloadTable() {
     let fetchUrl = '/macaddressReload';
-    let tableType = 'mac';
 
     if (fetchUrl) {
         fetch(fetchUrl)
         .then(response => response.json())
         .then(data => {
-            updateTable(data, tableType);
+            updateTable(data);
         })
         .catch(error => console.error('ERRO AO ATUALIZAR A TABELA:', error));
     }
 }
 
- setInterval(reloadTable, 10000);
+reloadTable();
+setInterval(reloadTable, 10000);

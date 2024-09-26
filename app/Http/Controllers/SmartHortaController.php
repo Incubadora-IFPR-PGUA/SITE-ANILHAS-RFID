@@ -14,12 +14,12 @@ class SmartHortaController extends Controller {
     }
 
     public function index() {
-        $data = $this->apiService->getHortaInJson();
+        $data = $this->apiService->listarHortaEmJson();
         return view('horta.index');
     }
 
-    public function hortaReload() {
-        $data = $this->apiService->getHortaInJson();
+    public function recarregar() {
+        $data = $this->apiService->listarHortaEmJson();
         return response()->json($data);
     }
 }
