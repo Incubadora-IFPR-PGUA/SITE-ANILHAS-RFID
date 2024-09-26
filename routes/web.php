@@ -13,17 +13,14 @@
     })->middleware(['auth'])->name('home');
 
     Route::middleware('auth')->group(function () {
-        Route::controller(SmartHarpiaController::class)->group(function () {
-            Route::get('/anilhas', 'anilhaIndex')->name('smart-anilhas');
-            Route::get('/mac', 'macaddressIndex')->name('mac-address');
-            Route::get('/smart-horta', 'hortaIndex')->name('smart-horta');
-        });
-
         Route::resource('macaddress', 'App\Http\Controllers\SmartHarpiaController');
         Route::resource('horta', 'App\Http\Controllers\SmartHortaController');
         Route::resource('cadastro', 'App\Http\Controllers\AnilhaCadastroController');
         Route::resource('pendente', 'App\Http\Controllers\AnilhaPendenteController');
         Route::resource('registro', 'App\Http\Controllers\AnilhaRegistroController');
+
+        Route::get('/macaddress', 'App\Http\Controllers\SmartHarpiaController@index')->name('macaddress');
+        Route::get('/smarthorta', 'App\Http\Controllers\SmartHortaController@index')->name('smarthorta');
 
         Route::get('/cadastroReload', 'App\Http\Controllers\AnilhaCadastroController@reload');
         Route::get('/registroReload', 'App\Http\Controllers\AnilhaRegistroController@reload');

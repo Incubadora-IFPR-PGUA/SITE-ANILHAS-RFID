@@ -47,51 +47,39 @@
                 </div>
                 
                 <div class="nav-links">
-                    @if(request()->routeIs('smart-anilhas')) 
-                        @can('hasFullPermission', App\Models\AnilhaCadastro::class)
-                        <x-nav-link :href="route('cadastro.index')" :active="request()->routeIs('cadastro.index')" class="nav-link">
-                            {{ __('Cadastro') }}
-                        </x-nav-link>
-                        @endcan
-                        @can('hasFullPermission', App\Models\AnilhaPendente::class)
-                        <x-nav-link :href="route('pendente.index')" :active="request()->routeIs('pendente.index')" class="nav-link">
-                            {{ __('Pendente') }}
-                        </x-nav-link>
-                        @endcan
-                        @can('hasFullPermission', App\Models\AnilhaRegistro::class)
-                        <x-nav-link :href="route('registro.index')" :active="request()->routeIs('registro.index')" class="nav-link">
-                            {{ __('Registro') }}
-                        </x-nav-link>
-                        @endcan
-                    @elseif(request()->routeIs('mac-address'))
-                        @can('hasFullPermission', App\Models\AnilhaRegistro::class)
-                        <x-nav-link :href="route('macaddress.index')" class="nav-link">
-                            {{ __('Registros') }}
-                        </x-nav-link>
-                        @endcan
-                    @elseif(request()->routeIs('smart-horta'))
-                        @can('hasFullPermission', App\Models\AnilhaRegistro::class)
-                        <x-nav-link :href="route('horta.index')" class="nav-link">
-                            {{ __('Registros') }}
-                        </x-nav-link>
-                        @endcan
-                    @else
-                        @can('hasFullPermission', App\Models\AnilhaRegistro::class)
-                        <x-nav-link :href="route('smart-anilhas')" class="nav-link">
-                            {{ __('Smart-Anilhas') }}
-                        </x-nav-link>
-                        @endcan
-                        @can('hasFullPermission', App\Models\AnilhaRegistro::class)
-                        <x-nav-link :href="route('smart-horta')" class="nav-link">
-                            {{ __('Smart-Horta') }}
-                        </x-nav-link>
-                        @endcan
-                        @can('hasFullPermission', App\Models\AnilhaRegistro::class)
-                        <x-nav-link :href="route('mac-address')" class="nav-link">
-                            {{ __('MacAddress') }}
-                        </x-nav-link>
-                        @endcan
-                    @endif
+                @if(request()->routeIs('pendente.index') || request()->routeIs('cadastro.index') || request()->routeIs('registro.index'))
+                    @can('hasFullPermission', App\Models\AnilhaCadastro::class)
+                    <x-nav-link :href="route('cadastro.index')" :active="request()->routeIs('cadastro.index')" class="nav-link">
+                        {{ __('Cadastro') }}
+                    </x-nav-link>
+                    @endcan
+                    @can('hasFullPermission', App\Models\AnilhaPendente::class)
+                    <x-nav-link :href="route('pendente.index')" :active="request()->routeIs('pendente.index')" class="nav-link">
+                        {{ __('Pendente') }}
+                    </x-nav-link>
+                    @endcan
+                    @can('hasFullPermission', App\Models\AnilhaRegistro::class)
+                    <x-nav-link :href="route('registro.index')" :active="request()->routeIs('registro.index')" class="nav-link">
+                        {{ __('Registro') }}
+                    </x-nav-link>
+                    @endcan
+                @else
+                    @can('hasFullPermission', App\Models\AnilhaRegistro::class)
+                    <x-nav-link :href="route('registro.index')" class="nav-link">
+                        {{ __('Smart-Anilhas') }}
+                    </x-nav-link>
+                    @endcan
+                    @can('hasFullPermission', App\Models\AnilhaRegistro::class)
+                    <x-nav-link :href="route('smarthorta')" class="nav-link">
+                        {{ __('Smart-Horta') }}
+                    </x-nav-link>
+                    @endcan
+                    @can('hasFullPermission', App\Models\AnilhaRegistro::class)
+                    <x-nav-link :href="route('macaddress')" class="nav-link">
+                        {{ __('MacAddress') }}
+                    </x-nav-link>
+                    @endcan
+                @endif
                 </div>
             </div>
 
