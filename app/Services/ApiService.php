@@ -17,31 +17,23 @@ class ApiService {
     }
 
     // Anilhas Cadastradas
-    public function getAnilhasCadastros() {
-        $response = Http::get("{$this->baseUrl}/listarAnilhaCadastradas");
+    public function listarAnilhasCadastradas() {
+        $response = Http::get("{$this->baseUrl}/listarAnilhasCadastradas");
         return $response->json();
     }
 
-    public function getAnilhasCadastrosInJson() {
-        $response = Http::get("{$this->baseUrl}/listarAnilhaCadastradas");
-        if ($response->successful()) {
-            return $response->json();
-        }
-        return [];
-    }    
-
-    public function setAnilhasCadastros($id, $dados) {
+    public function atualizarAnilhaCadastrada($id, $dados) {
         $response = Http::put("{$this->baseUrl}/atualizarAnilhaCadastrada/{$id}", $dados);
         return $response->json();
     }
 
-    public function getAnilhasCadastrosById($id) {
-        $response = Http::get("{$this->baseUrl}/getAnilhaCadastradaById/{$id}");
+    public function obterAnilhaCadastradaPorId($id) {
+        $response = Http::get("{$this->baseUrl}/obterAnilhaCadastradaPorId/{$id}");
         return $response->json();
     }
 
-    public function deleteAnilhasCadastrosById($id){
-        $response = Http::delete("{$this->baseUrl}/excluirAnilhaCadastrada/{$id}");
+    public function deletarAnilhaCadastrada($id){
+        $response = Http::delete("{$this->baseUrl}/deletarAnilhaCadastrada/{$id}");
         return $response->json();
     }
 

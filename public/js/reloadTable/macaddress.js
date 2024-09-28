@@ -13,8 +13,8 @@ function updateTable(data) {
             second: '2-digit',
         });
 
-        let latitude = item.esp_mac_adress.latitude;
-        let longitude = item.esp_mac_adress.longitude;
+        let latitude = item.macAddress_esp.latitude;
+        let longitude = item.macAddress_esp.longitude;
         let googleMapsLink = `https://www.google.com/maps?q=${latitude},${longitude}`;
 
         let row = `
@@ -31,7 +31,7 @@ function updateTable(data) {
                 <td class="py-2 px-4 border-b ${item.permitido ? 'text-success' : 'text-danger'}">
                     ${item.permitido ? 'Sim' : 'Não'}
                 </td>
-                <td class="py-2 px-4 border-b">${item.esp_mac_adress.id}</td>
+                <td class="py-2 px-4 border-b">${item.macAddress_esp.id}</td>
             </tr>
         `;
         tbody.innerHTML += row;

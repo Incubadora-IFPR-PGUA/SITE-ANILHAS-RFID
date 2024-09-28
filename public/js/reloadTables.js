@@ -38,14 +38,14 @@ function updateTable(data, type) {
         let row = '';
 
         if (type === 'cadastro' || type === 'pendente') {
-            row = `<tr class="clickable-row" data-id="${item.id}" data-name="${item.name}" data-codigo="${item.codigo}" style="cursor: pointer;" onmouseover="this.style.backgroundColor='#cce4ff';" onmouseout="this.style.backgroundColor='';"    >
-                <td class="py-2 px-4 border-b border-gray-300 text-center">${item.name}</td>
-                <td class="py-2 px-4 border-b border-gray-300 text-center">${item.codigo}</td>
+            row = `<tr class="clickable-row" data-id="${item.id}" data-name="${item.nome}" data-codigo="${item.numero_anilha}" style="cursor: pointer;" onmouseover="this.style.backgroundColor='#cce4ff';" onmouseout="this.style.backgroundColor='';"    >
+                <td class="py-2 px-4 border-b border-gray-300 text-center">${item.nome}</td>
+                <td class="py-2 px-4 border-b border-gray-300 text-center">${item.numero_anilha}</td>
             </tr>`;
         } else if (type === 'registro') {
-            row = `<tr class="clickable-row" data-id="${item.cadastro ? item.cadastro.id : 'N/A'}" data-name="${item.cadastro ? item.cadastro.name : 'N/A'}" data-codigo="${item.cadastro ? item.cadastro.codigo : 'N/A'}" data-updated-at="${item.updated_at ? new Date(item.updated_at).toLocaleString() : 'N/A'}" style="cursor: pointer;" onmouseover="this.style.backgroundColor='#cce4ff';" onmouseout="this.style.backgroundColor='';">
-                <td class="py-2 px-4 border-b border-gray-300 text-center">${item.cadastro ? item.cadastro.name : 'N/A'}</td>
-                <td class="py-2 px-4 border-b border-gray-300 text-center">${item.cadastro ? item.cadastro.codigo : 'N/A'}</td>
+            row = `<tr class="clickable-row" data-id="${item.anilha_cadastrada ? item.anilha_cadastrada.id : 'N/A'}" data-name="${item.anilha_cadastrada ? item.anilha_cadastrada.name : 'N/A'}" data-codigo="${item.anilha_cadastrada	 ? item.anilha_cadastrada.codigo : 'N/A'}" data-updated-at="${item.updated_at ? new Date(item.updated_at).toLocaleString() : 'N/A'}" style="cursor: pointer;" onmouseover="this.style.backgroundColor='#cce4ff';" onmouseout="this.style.backgroundColor='';">
+                <td class="py-2 px-4 border-b border-gray-300 text-center">${item.anilha_cadastrada	 ? item.anilha_cadastrada	.name : 'N/A'}</td>
+                <td class="py-2 px-4 border-b border-gray-300 text-center">${item.anilha_cadastrada	 ? item.anilha_cadastrada	.codigo : 'N/A'}</td>
                 <td class="py-2 px-4 border-b border-gray-300 text-center">${item.updated_at ? new Date(item.updated_at).toLocaleString() : 'N/A'}</td>
             </tr>`;
         }        

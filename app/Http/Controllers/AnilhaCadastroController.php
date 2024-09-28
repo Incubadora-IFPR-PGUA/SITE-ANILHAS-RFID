@@ -14,48 +14,42 @@ class AnilhaCadastroController extends Controller {
         $this->apiService = $apiService;
     }
 
-    public function reload() {
-        $this->authorize('hasFullPermission', AnilhaCadastro::class);
-        $data = $this->apiService->getAnilhasCadastrosInJson();
-        return response()->json($data); 
-    }
-    
     public function index() {
         $this->authorize('hasFullPermission', AnilhaCadastro::class);
-        $data = $this->apiService->getAnilhasCadastros();
+        $data = $this->apiService->listarAnilhasCadastradas();
         return view('cadastro.index', compact('data'));
+    }
+
+    public function reload() {
+        $this->authorize('hasFullPermission', AnilhaCadastro::class);
+        $data = $this->apiService->listarAnilhasCadastradas();
+        return response()->json($data); 
     }
 
     public function update(Request $request, $id) {
         $this->authorize('hasFullPermission', AnilhaCadastro::class);
         
-        // Validação do input
         $request->validate([
-            'name' => 'required|string|max:255', // Adapte conforme necessário
+            'name' => 'required|string|max:255',
         ]);
     
-        // Verifica se o cadastro existe
-        $data = $this->apiService->getAnilhasCadastrosById($id);
+        $data = $this->apiService->obterAnilhaCadastradaPorId($id);
         if (isset($data)) {
             $dadosAtualizacao = [
                 'name' => $request->input('name'),
-                'updated_at' => now(), // Adiciona o timestamp de atualização
+                'updated_at' => now(),
             ];
-    
-            // Atualiza os dados através da API
-            $this->apiService->setAnilhasCadastros($id, $dadosAtualizacao);
-            
-            return redirect()->route('cadastro.index')->with('success', 'Cadastro atualizado com sucesso!'); // Mensagem de sucesso
+            $this->apiService->atualizarAnilhaCadastrada($id, $dadosAtualizacao);
+            return redirect()->route('cadastro.index')->with('success', 'Cadastro atualizado com sucesso!');
         }
-        
-        return redirect()->route('cadastro.index')->with('error', 'ERRO: CADASTRO NÃO ENCONTRADO!'); // Mensagem de erro
+        return redirect()->route('cadastro.index')->with('error', 'ERRO: CADASTRO NÃO ENCONTRADO!');
     }    
     
     public function destroy($id) {
         $this->authorize('hasFullPermission', AnilhaCadastro::class);
-        $data = $this->apiService->getAnilhasCadastrosById($id);
+        $data = $this->apiService->obterAnilhaCadastradaPorId($id);
         if(isset($data)) {
-            $data = $this->apiService->deleteAnilhasCadastrosById($id);
+            $data = $this->apiService->deletarAnilhaCadastrada($id);
             return redirect()->route('cadastro.index');
         }
         return "<h1>ERRO: ANILHA NÃO ENCONTRADA!</h1>";
