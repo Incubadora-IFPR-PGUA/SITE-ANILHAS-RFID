@@ -28,7 +28,7 @@
         Route::get('/macaddressReload', 'App\Http\Controllers\SmartHarpiaController@macaddressReload');
         Route::get('/recarregarDadosHorta', 'App\Http\Controllers\SmartHortaController@recarregar');
 
-        Route::post('/pendente/{id}', 'App\Http\Controllers\AnilhaPendenteController@acceptRequest');
+        Route::post('/aceitarPendente/{id}', 'App\Http\Controllers\AnilhaPendenteController@aceitarPendente');
 
         Route::delete('/cadastroDelete/{id}', 'App\Http\Controllers\AnilhaCadastroController@destroy');
         Route::put('/cadastroUpdate/{id}', 'App\Http\Controllers\AnilhaCadastroController@update');

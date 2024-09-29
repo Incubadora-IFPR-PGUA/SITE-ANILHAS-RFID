@@ -13,6 +13,6 @@
     </div>
 </div>
 
-<script src="{{ asset('js/reloadTables.js') }}"></script>
+<script src="{{ asset('js/reloadTable/registro.js') }}"></script>
 
 @endsection

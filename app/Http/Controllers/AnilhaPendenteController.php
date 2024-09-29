@@ -15,20 +15,20 @@ class AnilhaPendenteController extends Controller {
         $this->apiService = $apiService;
     }
 
-    public function reload() {
-        $this->authorize('hasFullPermission', AnilhaPendente::class);
-        $data = $this->apiService->getAnilhasPendentesInJson();
-        return response()->json($data); 
-    }
-    
     public function index() {
         $this->authorize('hasFullPermission', AnilhaPendente::class);
-        $data = $this->apiService->getAnilhasPendentes();  
+        $data = $this->apiService->listarAnilhasPendentes();  
         return view('pendente.index', compact('data'));
     }
 
-    public function acceptRequest($id) {
-        $data = $this->apiService->acceptRequest($id);
+    public function reload() {
+        $this->authorize('hasFullPermission', AnilhaPendente::class);
+        $data = $this->apiService->listarAnilhasPendentes();
+        return response()->json($data); 
+    }
+
+    public function aceitarPendente($id) {
+        $data = $this->apiService->aceitarPendente($id);
         if (isset($data['message'])) {
             return redirect()->back()->with('status', $data['message']);
         }
@@ -37,12 +37,12 @@ class AnilhaPendenteController extends Controller {
 
     public function update(Request $request, $id) {
         $this->authorize('hasFullPermission', AnilhaPendente::class);
-        $data = $this->apiService->getAnilhasPendentesById($id);
+        $data = $this->apiService->obterAnilhaPendentePorId($id);
         if(isset($data)) {
             $dadosAtualizacao = [
                 'name' => $request->input('name')
             ];
-            $data = $this->apiService->setAnilhasPendentes($id, $dadosAtualizacao);
+            $data = $this->apiService->atualizarAnilhaPendente($id, $dadosAtualizacao);
             return redirect()->route('pendente.index');
         }
         return "<h1>ERRO: CADASTRO NÃO ENCONTRADO!</h1>";
@@ -50,9 +50,9 @@ class AnilhaPendenteController extends Controller {
 
     public function destroy($id) {
         $this->authorize('hasFullPermission', AnilhaPendente::class);
-        $data = $this->apiService->getAnilhasPendentesById($id);
+        $data = $this->apiService->obterAnilhaPendentePorId($id);
         if(isset($data)) {
-            $data = $this->apiService->deleteAnilhasPendentesById($id);
+            $data = $this->apiService->deletarAnilhaPendente($id);
             return redirect()->route('pendente.index');
         }
         return "<h1>ERRO: ANILHA NÃO ENCONTRADA!</h1>";

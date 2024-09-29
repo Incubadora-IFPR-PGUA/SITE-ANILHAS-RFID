@@ -11,11 +11,6 @@ class ApiService {
         $this->baseUrl = config('services.api.base_url');
     }
 
-    public function acceptRequest($id) {
-        $response = Http::post("{$this->baseUrl}/pendente/{$id}");
-        return $response->json();
-    }
-
     // Anilhas Cadastradas
     public function listarAnilhasCadastradas() {
         $response = Http::get("{$this->baseUrl}/listarAnilhasCadastradas");
@@ -37,6 +32,32 @@ class ApiService {
         return $response->json();
     }
 
+    // Anilhas Pendentes
+    public function aceitarPendente($id) {
+        $response = Http::post("{$this->baseUrl}/aceitarPendente/{$id}");
+        return $response->json();
+    }
+
+    public function listarAnilhasPendentes() {
+        $response = Http::get("{$this->baseUrl}/listarAnilhasPendentes");
+        return $response->json();
+    }
+
+    public function atualizarAnilhaPendente($id, $dados) {
+        $response = Http::put("{$this->baseUrl}/atualizarAnilhaPendente/{$id}", $dados);
+        return $response->json();
+    }
+
+    public function obterAnilhaPendentePorId($id) {
+        $response = Http::get("{$this->baseUrl}/obterAnilhaPendentePorId/{$id}");
+        return $response->json();
+    }
+
+    public function deletarAnilhaPendente($id){
+        $response = Http::delete("{$this->baseUrl}/deletarAnilhaPendente/{$id}");
+        return $response->json();
+    }
+
     // Anilhas Registros
     public function getAnilhasRegistros() {
         $response = Http::get("{$this->baseUrl}/listarAnilhaRegistros");
@@ -50,35 +71,6 @@ class ApiService {
         }
         return [];
     }    
-
-    // Anilhas Pendentes
-    public function getAnilhasPendentes() {
-        $response = Http::get("{$this->baseUrl}/listarAnilhaPendentes");
-        return $response->json();
-    }
-
-    public function getAnilhasPendentesInJson() {
-        $response = Http::get("{$this->baseUrl}/listarAnilhaPendentes");
-        if ($response->successful()) {
-            return $response->json();
-        }
-        return [];
-    }    
-
-    public function setAnilhasPendentes($id, $dados) {
-        $response = Http::put("{$this->baseUrl}/atualizarAnilhaPendente/{$id}", $dados);
-        return $response->json();
-    }
-
-    public function getAnilhasPendentesById($id) {
-        $response = Http::get("{$this->baseUrl}/getAnilhaPendenteById/{$id}");
-        return $response->json();
-    }
-
-    public function deleteAnilhasPendentesById($id){
-        $response = Http::delete("{$this->baseUrl}/excluirAnilhaPendente/{$id}");
-        return $response->json();
-    }
 
     // HORTA API
     public function listarHortaEmJson(){

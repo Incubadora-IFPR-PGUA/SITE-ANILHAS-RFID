@@ -1,4 +1,4 @@
-function updateTable(data) {
+function atualizaTabela(data) {
     let tbody = document.querySelector('tbody');
     tbody.innerHTML = '';
 
@@ -21,7 +21,7 @@ function updateTable(data) {
             <tr class="text-center clickable-row" style="cursor: pointer;" 
                 onmouseover="this.style.backgroundColor='#cce4ff';" 
                 onmouseout="this.style.backgroundColor='';" 
-                onclick="openModal('${item.MAC}', '${item.fabricante}')">
+                onclick="abrirModal('${item.MAC}', '${item.fabricante}')">
                 <td class="py-2 px-4 border-b">${formattedDate}</td>
                 <td class="py-2 px-4 border-b">
                     <a href="${googleMapsLink}" target="_blank" class="text-decoration-none">
@@ -38,25 +38,21 @@ function updateTable(data) {
     });
 }
 
-function openModal(mac, fabricante) {
+function abrirModal(mac, fabricante) {
     document.getElementById('mac').value = mac;
     document.getElementById('fabric').value = fabricante;
     const modal = new bootstrap.Modal(document.getElementById('MyModal'));
     modal.show();
 }
 
-function reloadTable() {
-    let fetchUrl = '/macaddressReload';
-
-    if (fetchUrl) {
-        fetch(fetchUrl)
-        .then(response => response.json())
-        .then(data => {
-            updateTable(data);
-        })
-        .catch(error => console.error('ERRO AO ATUALIZAR A TABELA:', error));
-    }
+function recarregarTabela() {
+    fetch('/macaddressReload')
+    .then(response => response.json())
+    .then(data => {
+        atualizaTabela(data);
+    })
+    .catch(error => console.error('ERRO AO ATUALIZAR A TABELA:', error));
 }
 
-reloadTable();
-setInterval(reloadTable, 10000);
+recarregarTabela();
+setInterval(recarregarTabela, 10000);

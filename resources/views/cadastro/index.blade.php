@@ -24,7 +24,6 @@
           </div>
           <div class="modal-footer d-flex justify-content-between">
             <button id="btCancelEdit" type="button" class="btn btn-secondary">Voltar</button>
-            <button id="btViewAccept" type="button" class="btn btn-success">Aceitar</button>
             <button id="btSalvar" type="submit" class="btn btn-primary">Salvar</button>
           </div>
         </form>
@@ -62,6 +61,6 @@
     </div>
 </div>
 
-<script src="{{ asset('js/reloadTables.js') }}"></script>
+<script src="{{ asset('js/reloadTable/cadastro.js') }}"></script>
 
 @endsection

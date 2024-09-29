@@ -63,6 +63,6 @@
     </div>
 </div>
 
-<script src="{{ asset('js/reloadTables.js') }}"></script>
+<script src="{{ asset('js/reloadTable/pendente.js') }}"></script>
 
 @endsection

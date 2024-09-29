@@ -29,16 +29,12 @@ function atualizaTabela(data) {
 }
 
 function recarregarTabela() {
-    let fetchUrl = '/recarregarDadosHorta';
-
-    if (fetchUrl) {
-        fetch(fetchUrl)
-        .then(response => response.json())
-        .then(data => {
-            atualizaTabela(data.data);
-        })
-        .catch(error => console.error('ERRO AO ATUALIZAR A TABELA:', error));
-    }
+    fetch('/recarregarDadosHorta')
+    .then(response => response.json())
+    .then(data => {
+        atualizaTabela(data.data);
+    })
+    .catch(error => console.error('ERRO AO ATUALIZAR A TABELA:', error));
 }
 
 recarregarTabela();
