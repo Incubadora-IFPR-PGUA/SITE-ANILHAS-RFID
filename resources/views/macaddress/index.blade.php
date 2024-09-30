@@ -21,6 +21,11 @@
                     <input type="text" class="form-control" id="fabric" name="fabric" disabled>
                 </div>
                 </form>
+                <label for="local" class="form-label">Localização</label>
+                <!-- Google Maps iframe -->
+                <div id="map" class="mt-3" style="height: 250px; width: 100%;">
+                    <iframe class="form-control" id="mapFrame" width="100%" height="100%" style="border:0;"src="" allowfullscreen="" loading="lazy"></iframe>
+                </div>
             </div>
         </div>
     </div>
@@ -34,7 +39,6 @@
         <thead>
           <tr class="text-center">
             <th class="py-2 px-4 border-b relative" style="cursor: pointer">Data/Hora ▼</th>
-            <th class="py-2 px-4 border-b relative" style="cursor: pointer">Localização ▼</th>
             <th class="py-2 px-4 border-b relative" style="cursor: pointer">Permitido ▼</th>
             <th class="py-2 px-4 border-b relative" style="cursor: pointer">Qual ESP Pegou ▼</th>
           </tr>
@@ -44,6 +48,10 @@
     </div>
   </div>
 </div>
+
+<script>
+    const GOOGLE_MAPS_API_KEY = "{{ env('GOOGLE_MAPS_API_KEY') }}";
+</script>
 
 <script src="{{ asset('js/reloadTable/macaddress.js') }}"></script>
 
