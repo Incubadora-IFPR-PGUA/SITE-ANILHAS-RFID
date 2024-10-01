@@ -33,18 +33,15 @@ class ApiService {
     }
 
     // Anilhas Pendentes
-    public function aceitarPendente($id) {
-        $response = Http::post("{$this->baseUrl}/aceitarPendente/{$id}");
+    public function aceitarPendente($id, $name) {
+        $response = Http::post("{$this->baseUrl}/aceitarPendente/{$id}", [
+            'name' => $name
+        ]);
         return $response->json();
     }
 
     public function listarAnilhasPendentes() {
         $response = Http::get("{$this->baseUrl}/listarAnilhasPendentes");
-        return $response->json();
-    }
-
-    public function atualizarAnilhaPendente($id, $dados) {
-        $response = Http::put("{$this->baseUrl}/atualizarAnilhaPendente/{$id}", $dados);
         return $response->json();
     }
 
@@ -63,14 +60,6 @@ class ApiService {
         $response = Http::get("{$this->baseUrl}/listarAnilhaRegistros");
         return $response->json();
     }
-
-    public function getAnilhasRegistrosInJson() {
-        $response = Http::get("{$this->baseUrl}/listarAnilhaRegistros");
-        if ($response->successful()) {
-            return $response->json();
-        }
-        return [];
-    }    
 
     // HORTA API
     public function listarHortaEmJson(){

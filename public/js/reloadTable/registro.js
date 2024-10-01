@@ -32,61 +32,6 @@ function atualizaTabela(data) {
         </tr>`;
 
         tableBody.innerHTML += row;
-    });
-
-    let currentId;
-
-    document.querySelectorAll('.clickable-row').forEach(row => {
-        row.addEventListener('click', function() {
-            const name = this.getAttribute('data-name');
-            const codigo = this.getAttribute('data-codigo');
-            const id = this.getAttribute('data-id');
-            currentId = id;
-
-            const viewForm = document.getElementById('viewForm');
-            const editForm = document.getElementById('editForm');
-            const btViewEdit = document.getElementById('btViewEdit');
-            const btViewDelete = document.getElementById('btViewDelete');
-            const btViewAccept = document.getElementById('btViewAccept');
-
-            viewForm.action = `/registroDelete/${id}`;
-            editForm.action = `/registroUpdate/${id}`;
-            btViewAccept.style.display = 'none';
-
-            editForm.style.display = 'none';
-            viewForm.style.display = 'block';
-            btViewDelete.style.display = 'inline';
-            btViewEdit.style.display = 'inline';
-
-            document.getElementById('viewName').value = name;
-            document.getElementById('viewCodigo').value = codigo;
-            
-            const btCancelEdit = document.getElementById('btCancelEdit');
-            const btSalvar = document.getElementById('btSalvar');
-    
-            const modal = new bootstrap.Modal(document.getElementById('MyModal'));
-            modal.show();
-            
-            btViewEdit.addEventListener('click', () => {
-                viewForm.style.display = 'none';
-                editForm.style.display = 'block';
-                btViewDelete.style.display = 'none';
-                btViewEdit.style.display = 'none';
-                btCancelEdit.style.display = 'inline';
-                btSalvar.style.display = 'inline';
-                document.getElementById('editName').value = name;
-                document.getElementById('editCodigo').value = codigo;
-            });
-            
-            btCancelEdit.addEventListener('click', () => {
-                viewForm.style.display = 'block';
-                editForm.style.display = 'none';
-                btCancelEdit.style.display = 'none';
-                btSalvar.style.display = 'none';
-                btViewDelete.style.display = 'inline';
-                btViewEdit.style.display = 'inline';
-            });
-        });    
     });    
 }
 

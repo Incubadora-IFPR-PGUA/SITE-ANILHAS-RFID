@@ -2,39 +2,29 @@
 
 @section('conteudo')
 
+<!-- Tela de Carregamento -->
+<div id="loadingScreen" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(255, 255, 255, 0.8); z-index:10000; display:flex; align-items:center; justify-content:center;">
+    <div class="spinner-border text-primary" role="status">
+        <span class="sr-only">Carregando...</span>
+    </div>
+</div>
+
 <!-- Modal -->
 <div class="modal fade" id="MyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+        <h5 class="modal-title" id="viewFormModalLabel">Informações da Anilha</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <!-- Modo de Edicao -->
-        <form id="editForm" method="POST" style="display: none;">
-          @csrf
-          @method('PUT') <!-- Isso definirá o método PUT para a requisição de atualização -->
-          <div class="mb-3">
-            <label for="editName" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="editName" name="name" required>
-          </div>
-          <div class="mb-3">
-            <label for="editCodigo" class="form-label">Anilha</label>
-            <input type="text" class="form-control" id="editCodigo" name="codigo" disabled>
-          </div>
-          <div class="modal-footer d-flex justify-content-between">
-            <button id="btCancelEdit" type="button" class="btn btn-secondary">Voltar</button>
-            <button id="btSalvar" type="submit" class="btn btn-primary">Salvar</button>
-          </div>
-        </form>
-
         <!-- Modo de Visualizacao -->
         <form id="viewForm" method="POST" action="/cadastroDelete/{id}" style="display: block;">
           @csrf
           @method('DELETE')
           <div class="mb-3">
             <label for="viewName" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="viewName" name="name" disabled>
+            <input type="text" class="form-control" id="viewName" name="name" enabled>
           </div>
           <div class="mb-3">
             <label for="viewCodigo" class="form-label">Anilha</label>
@@ -43,7 +33,6 @@
           <div class="modal-footer d-flex justify-content-between">
             <button id="btViewDelete" type="submit" class="btn btn-danger">Excluir</button>
             <button id="btViewAccept" type="button" class="btn btn-success">Aceitar</button>
-            <button id="btViewEdit" type="button" class="btn btn-primary">Editar</button>
           </div>
         </form>
       </div>

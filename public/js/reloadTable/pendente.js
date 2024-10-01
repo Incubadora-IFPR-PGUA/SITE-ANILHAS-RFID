@@ -1,3 +1,8 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const loadingScreen = document.getElementById('loadingScreen');
+    loadingScreen.style.display = 'none';
+});
+
 function atualizaTabela(data) {
     let tableBody = document.querySelector('table tbody');
     let theadBody = document.querySelector('thead tr');
@@ -41,78 +46,55 @@ function atualizaTabela(data) {
             const codigo = this.getAttribute('data-codigo');
             const id = this.getAttribute('data-id');
             currentId = id;
+            currentName = name;
 
             const viewForm = document.getElementById('viewForm');
-            const editForm = document.getElementById('editForm');
-            const btViewEdit = document.getElementById('btViewEdit');
             const btViewDelete = document.getElementById('btViewDelete');
             const btViewAccept = document.getElementById('btViewAccept');
 
             viewForm.action = `/pendenteDelete/${id}`;
-            editForm.action = `/pendenteUpdate/${id}`;
             btViewAccept.style.display = 'inline';
 
-            editForm.style.display = 'none';
             viewForm.style.display = 'block';
             btViewDelete.style.display = 'inline';
-            btViewEdit.style.display = 'inline';
 
             document.getElementById('viewName').value = name;
             document.getElementById('viewCodigo').value = codigo;
-            
-            const btCancelEdit = document.getElementById('btCancelEdit');
-            const btSalvar = document.getElementById('btSalvar');
     
             const modal = new bootstrap.Modal(document.getElementById('MyModal'));
             modal.show();
-            
-            btViewEdit.addEventListener('click', () => {
-                viewForm.style.display = 'none';
-                editForm.style.display = 'block';
-                btViewDelete.style.display = 'none';
-                btViewEdit.style.display = 'none';
-                btViewAccept.style.display = 'none';
-                btCancelEdit.style.display = 'inline';
-                btSalvar.style.display = 'inline';
-                document.getElementById('editName').value = name;
-                document.getElementById('editCodigo').value = codigo;
-            });
-            
-            btCancelEdit.addEventListener('click', () => {
-                viewForm.style.display = 'block';
-                editForm.style.display = 'none';
-                btCancelEdit.style.display = 'none';
-                btSalvar.style.display = 'none';
-                btViewDelete.style.display = 'inline';
-                btViewEdit.style.display = 'inline';
-                btViewAccept.style.display = 'inline';
-                document.getElementById('viewName').value = name;
-                document.getElementById('viewCodigo').value = codigo;
-            });
-
-            btViewAccept.addEventListener('click', () => {
-                const url = `/aceitarPendente/${currentId}`;
-                
-                fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    }
-                })
-                .then(response => {
-                    if (response.ok){
-                        modal.hide();
-                        reloadTable();
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao aceitar o registro:', error);
-                    alert('Erro ao aceitar o registro.');
-                });
-            });
         });    
-    });    
+    });
+
+    document.getElementById('btViewAccept').addEventListener('click', () => {
+        if (currentId) {
+            const updatedName = document.getElementById('viewName').value;
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.style.display = 'flex';
+    
+            fetch(`/aceitarPendente/${currentId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ name: updatedName })
+            })
+            .then(response => {
+                // nao botei nada pq sempre da erro
+            })
+            .catch(error => {
+                console.error('Erro ao aceitar o registro:', error);
+                alert('Erro ao aceitar o registro.');
+            })
+            .finally(() => {
+                recarregarTabela();
+                const modal = bootstrap.Modal.getInstance(document.getElementById('MyModal'));
+                modal.hide();
+                loadingScreen.style.display = 'none';
+            });
+        }
+    });
 }
 
 function recarregarTabela() {

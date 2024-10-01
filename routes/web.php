@@ -29,11 +29,10 @@
         Route::get('/recarregarDadosHorta', 'App\Http\Controllers\SmartHortaController@recarregar');
 
         Route::post('/aceitarPendente/{id}', 'App\Http\Controllers\AnilhaPendenteController@aceitarPendente');
+        Route::delete('/pendenteDelete/{id}', 'App\Http\Controllers\AnilhaPendenteController@destroy');
 
         Route::delete('/cadastroDelete/{id}', 'App\Http\Controllers\AnilhaCadastroController@destroy');
         Route::put('/cadastroUpdate/{id}', 'App\Http\Controllers\AnilhaCadastroController@update');
-        Route::delete('/pendenteDelete/{id}', 'App\Http\Controllers\AnilhaPendenteController@destroy');
-        Route::put('/pendenteUpdate/{id}', 'App\Http\Controllers\AnilhaPendenteController@update');
     });
 
     require __DIR__.'/auth.php';

@@ -28,7 +28,8 @@ class AnilhaPendenteController extends Controller {
     }
 
     public function aceitarPendente($id) {
-        $data = $this->apiService->aceitarPendente($id);
+        $name = request()->input('name');
+        $data = $this->apiService->aceitarPendente($id, $name);
         if (isset($data['message'])) {
             return redirect()->back()->with('status', $data['message']);
         }
