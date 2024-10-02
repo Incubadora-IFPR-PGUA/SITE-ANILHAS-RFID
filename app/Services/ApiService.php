@@ -56,7 +56,7 @@ class ApiService {
     }
 
     // Anilhas Registros
-    public function getAnilhasRegistros() {
+    public function listarAnilhasRegistros() {
         $response = Http::get("{$this->baseUrl}/listarAnilhaRegistros");
         return $response->json();
     }

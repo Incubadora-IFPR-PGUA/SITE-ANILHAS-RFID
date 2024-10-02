@@ -12,7 +12,12 @@ function atualizaTabela(data) {
         theadBody.innerHTML = '';
         tableBody.innerHTML = `
             <tr>
-                <td colspan="3" class="py-6 text-lg text-gray-600 text-center">Nenhum registro pendente foi encontrado.</td>
+                <td colspan="3" class="py-6 text-lg text-gray-600 text-center">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="galinha.png" alt="Nenhum registro encontrado" style="width: 150px; margin-bottom: 10px;">
+                        <span>Nenhum registro foi encontrado.</span>
+                    </div>
+                </td>
             </tr>
         `;
         return;
